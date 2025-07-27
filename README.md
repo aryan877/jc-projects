@@ -50,6 +50,61 @@ pnpm install
 pnpm dev
 ```
 
+## Setup React Project in Existing Folder
+
+### Option 1: Setup in Current Directory (Recommended)
+
+```bash
+# Navigate to your existing project folder
+cd your-project-folder
+
+# Create Vite React project in current directory (will prompt to continue)
+npm create vite@latest . -- --template react
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Option 2: Alternative Method
+
+```bash
+# Navigate to your existing project folder
+cd your-project-folder
+
+# Create temporary project and move files
+npm create vite@latest temp-project -- --template react
+mv temp-project/* .
+mv temp-project/.* . 2>/dev/null || true
+rmdir temp-project
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Option 3: Manual Setup
+
+```bash
+# Navigate to your existing project folder
+cd your-project-folder
+
+# Initialize package.json
+npm init -y
+
+# Install Vite and React dependencies
+npm install vite @vitejs/plugin-react react react-dom
+
+# Install dev dependencies (optional)
+npm install -D @types/react @types/react-dom
+
+# Create vite.config.js, index.html, and src folder manually
+```
+
 ## Why Vite in 2025?
 
 - ⚡ **Lightning Fast**: Instant server startup and hot module replacement
@@ -71,12 +126,13 @@ npm run preview      # Preview production build locally
 npm run lint         # Run ESLint (if configured)
 ```
 
-## Project Structure
+## Generic Project Structure
 
 ```
-my-react-app/
+your-project-folder/
 ├── public/          # Static assets
 ├── src/             # Source code
+│   ├── components/  # React components
 │   ├── App.jsx      # Main App component
 │   ├── main.jsx     # Entry point
 │   └── index.css    # Global styles
@@ -108,3 +164,5 @@ npm install react-router-dom
 ---
 
 > **Note**: Vite has become the standard for React development in 2025, replacing Create React App which is now deprecated. This setup provides the fastest development experience with modern tooling.
+
+> **For Project Folders**: Use the "Setup React Project in Existing Folder" commands above to initialize React in any of your existing project directories (01-color-palette-generator, 02-password-generator, etc.).

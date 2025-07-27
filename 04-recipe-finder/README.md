@@ -5,9 +5,11 @@
 **Focus:** Complex State, Data Filtering, Component Architecture
 
 ## What You'll Build
+
 A comprehensive recipe finder app where users can search recipes, filter by dietary preferences, save favorites, and create meal plans. Features detailed recipe views with ingredients, instructions, and nutritional info.
 
 ## Learning Goals
+
 - Managing complex application state
 - Advanced filtering and searching
 - Component composition patterns
@@ -17,6 +19,7 @@ A comprehensive recipe finder app where users can search recipes, filter by diet
 - Performance optimization with useMemo
 
 ## Features to Implement
+
 1. **Recipe Search** - Search by ingredients, cuisine, or recipe name
 2. **Advanced Filters** - Diet, cuisine, prep time, difficulty
 3. **Recipe Details** - Full recipe with ingredients and instructions
@@ -26,6 +29,7 @@ A comprehensive recipe finder app where users can search recipes, filter by diet
 7. **Nutritional Info** - Calories, macros, dietary tags
 
 ## Project Structure
+
 ```
 src/
   components/
@@ -55,22 +59,26 @@ src/
 ## Step-by-Step Guide
 
 ### Step 1: Setup & API Integration (45 mins)
+
 ```bash
 npx create-react-app recipe-finder
 cd recipe-finder
 ```
+
 - Register for Spoonacular API
 - Setup environment variables
 - Create API service functions
 - Test basic recipe fetching
 
 ### Step 2: Context & State Management (60 mins)
+
 - Learn about React Context
 - Create RecipeContext for global state
 - Manage recipes, favorites, and filters
 - Implement context provider
 
 ### Step 3: Search & Filter System (90 mins)
+
 - Build search input component
 - Create filter panel with multiple options
 - Implement search logic
@@ -78,6 +86,7 @@ cd recipe-finder
 - Handle empty states and loading
 
 ### Step 4: Recipe Display Components (75 mins)
+
 - Design recipe card component
 - Create responsive grid layout
 - Add recipe detail modal/page
@@ -85,24 +94,28 @@ cd recipe-finder
 - Format cooking times and difficulty
 
 ### Step 5: Favorites & Persistence (60 mins)
+
 - Implement add/remove favorites
 - Create custom useLocalStorage hook
 - Build favorites page
 - Handle favorites state across app
 
 ### Step 6: Meal Planning Feature (90 mins)
+
 - Create weekly meal planner
 - Drag and drop recipes to days
 - Store meal plans in localStorage
 - Display planned meals calendar view
 
 ### Step 7: Shopping List Generator (45 mins)
+
 - Extract ingredients from planned meals
 - Combine duplicate ingredients
 - Create printable shopping list
 - Allow manual additions/removals
 
 ## Key React Concepts
+
 - **Context API:** Global state without prop drilling
 - **Custom Hooks:** Reusable stateful logic
 - **useMemo:** Performance optimization for expensive calculations
@@ -114,43 +127,50 @@ cd recipe-finder
 ## Code Examples
 
 ### Custom Hook
+
 ```jsx
 const useRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
   const searchRecipes = useCallback(async (query, filters) => {
     setLoading(true);
     try {
       const results = await recipeAPI.search(query, filters);
       setRecipes(results);
     } catch (error) {
-      console.error('Search failed:', error);
+      console.error("Search failed:", error);
     } finally {
       setLoading(false);
     }
   }, []);
-  
+
   return { recipes, loading, searchRecipes };
 };
 ```
 
 ### Context Implementation
+
 ```jsx
 const RecipeContext = createContext();
 
 export const RecipeProvider = ({ children }) => {
-  const [favorites, setFavorites] = useLocalStorage('favorites', []);
-  const [mealPlan, setMealPlan] = useLocalStorage('mealPlan', {});
-  
+  const [favorites, setFavorites] = useLocalStorage("favorites", []);
+  const [mealPlan, setMealPlan] = useLocalStorage("mealPlan", {});
+
   const addToFavorites = (recipe) => {
-    setFavorites(prev => [...prev, recipe]);
+    setFavorites((prev) => [...prev, recipe]);
   };
-  
+
   return (
-    <RecipeContext.Provider value={{
-      favorites, addToFavorites, mealPlan, setMealPlan
-    }}>
+    <RecipeContext.Provider
+      value={{
+        favorites,
+        addToFavorites,
+        mealPlan,
+        setMealPlan,
+      }}
+    >
       {children}
     </RecipeContext.Provider>
   );
@@ -158,6 +178,7 @@ export const RecipeProvider = ({ children }) => {
 ```
 
 ## API Integration
+
 - **Spoonacular API** - Comprehensive recipe database
 - **Recipe Search** - Find recipes by various criteria
 - **Recipe Information** - Detailed recipe data
@@ -165,6 +186,7 @@ export const RecipeProvider = ({ children }) => {
 - **Image URLs** - High-quality recipe photos
 
 ## Advanced Features
+
 - **Pagination** - Handle large result sets
 - **Infinite Scroll** - Load more recipes automatically
 - **Recipe Scaling** - Adjust serving sizes
@@ -173,6 +195,7 @@ export const RecipeProvider = ({ children }) => {
 - **Recipe Comments** - User feedback
 
 ## Styling Considerations
+
 - **Grid Layouts** - Responsive recipe cards
 - **Image Optimization** - Lazy loading and fallbacks
 - **Filter UI** - Intuitive filtering interface
@@ -180,12 +203,14 @@ export const RecipeProvider = ({ children }) => {
 - **Print Styles** - Printable shopping lists and recipes
 
 ## Performance Optimization
+
 - **Debounced Search** - Reduce API calls
 - **Image Lazy Loading** - Improve initial load time
 - **Component Memoization** - Prevent unnecessary re-renders
 - **Virtual Scrolling** - Handle large lists efficiently
 
 ## Bonus Challenges
+
 - Recipe sharing functionality
 - User-generated recipes
 - Recipe difficulty calculator
@@ -196,18 +221,21 @@ export const RecipeProvider = ({ children }) => {
 - Recipe recommendation engine
 
 ## Testing Strategies
+
 - Unit tests for utility functions
 - Integration tests for API calls
 - Component testing with React Testing Library
 - E2E tests for critical user flows
 
 ## Resources
+
 - [Spoonacular API Documentation](https://spoonacular.com/food-api)
 - [React Context Documentation](https://react.dev/reference/react/useContext)
 - [Custom Hooks Guide](https://react.dev/learn/reusing-logic-with-custom-hooks)
 - [Performance Optimization](https://react.dev/reference/react/useMemo)
 
 ## Common Challenges
+
 - API rate limiting management
 - Image loading and error handling
 - Complex state synchronization
@@ -216,4 +244,5 @@ export const RecipeProvider = ({ children }) => {
 - Data persistence across sessions
 
 ## Next Steps
+
 Excellent work on managing complex state and data! For the final project, the Habit Tracker, you'll learn about data visualization, advanced animations, and building a complete productivity application with charts and progress tracking!
