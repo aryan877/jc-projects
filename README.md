@@ -59,7 +59,7 @@ pnpm dev
 cd your-project-folder
 
 # Create Vite React project in current directory (will prompt to continue)
-npm create vite@latest . -- --template react
+npm create vite@latest my-react-app -- --template react
 
 # Install dependencies
 npm install
