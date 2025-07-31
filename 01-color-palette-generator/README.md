@@ -74,7 +74,7 @@ Your browser should open to `http://localhost:5173` and display the default Vite
 
 ---
 
-## 🎨 Step 1: Setting Up Tailwind CSS (The 2025 Way)
+## 🎨 Step 1: Setting Up Tailwind CSS (The Stable Way)
 
 Our first task is to add Tailwind CSS, a modern way to style our app without writing a lot of custom CSS.
 
@@ -87,42 +87,24 @@ In your terminal, press `Ctrl + C` to stop the running development server.
 Run this command to install the necessary packages:
 
 ```bash
-npm install tailwindcss@latest @tailwindcss/vite@latest
+npm install -D tailwindcss@3 postcss autoprefixer
 ```
 
 - `tailwindcss`: The core Tailwind CSS framework.
-- `@tailwindcss/vite`: A special plugin that makes Tailwind work smoothly with Vite.
+- `postcss`: A tool for transforming CSS that Tailwind relies on.
+- `autoprefixer`: Automatically handles vendor prefixes for better browser compatibility.
 
-### 1.3 Configure Vite for Tailwind
-
-We need to tell Vite to use our new Tailwind plugin.
-
-- **Open the file:** `vite.config.js`
-- **Replace its entire content with this:**
-
-  ```javascript
-  import { defineConfig } from "vite";
-  import react from "@vitejs/plugin-react-swc";
-  import tailwindcss from "@tailwindcss/vite";
-
-  export default defineConfig({
-    plugins: [react(), tailwindcss()],
-  });
-  ```
-
-  This adds `tailwindcss()` to Vite's list of active plugins.
-
-### 1.4 Configure Tailwind CSS
+### 1.3 Configure Tailwind CSS
 
 Now, we need to tell Tailwind where to find our code so it can generate the right styles.
 
 - **Run this command in your terminal:**
 
   ```bash
-  npx tailwindcss init
+  npx tailwindcss init -p
   ```
 
-  This creates a new file called `tailwind.config.js`.
+  This creates two files: `tailwind.config.js` and `postcss.config.js`.
 
 - **Open the new file:** `tailwind.config.js`
 - **Replace its content with this:**
@@ -138,16 +120,18 @@ Now, we need to tell Tailwind where to find our code so it can generate the righ
   ```
   The `content` section tells Tailwind to scan all `.jsx`, `.tsx`, `.js`, and `.html` files in your `src` folder for class names.
 
-### 1.5 Add Tailwind's Base Styles
+### 1.4 Add Tailwind's Base Styles
 
 - **Open the file:** `src/index.css`
 - **Delete everything** inside it and **replace it with these three lines:**
   ```css
-  @import "tailwindcss";
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
   ```
-  These directives are placeholders that Tailwind will replace with its generated styles.
+  These directives tell Tailwind to inject its base styles, component classes, and utility classes.
 
-### 1.6 Let's Test It!
+### 1.5 Let's Test It!
 
 - **Open the file:** `src/App.jsx`
 - **Replace its content with this code:**
