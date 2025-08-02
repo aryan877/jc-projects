@@ -11,10 +11,18 @@ export const generatePassword = (length, options) => {
   let availableChars = "";
 
   // Build character set based on selected options
-  if (options.lowercase) availableChars += CHAR_SETS.lowercase;
-  if (options.uppercase) availableChars += CHAR_SETS.uppercase;
-  if (options.numbers) availableChars += CHAR_SETS.numbers;
-  if (options.symbols) availableChars += CHAR_SETS.symbols;
+  if (options.lowercase) {
+    availableChars += CHAR_SETS.lowercase;
+  }
+  if (options.uppercase) {
+    availableChars += CHAR_SETS.uppercase;
+  }
+  if (options.numbers) {
+    availableChars += CHAR_SETS.numbers;
+  }
+  if (options.symbols) {
+    availableChars += CHAR_SETS.symbols;
+  }
 
   // Ensure at least one character type is selected
   if (availableChars === "") {
@@ -37,20 +45,38 @@ export const calculatePasswordStrength = (password, options) => {
   let score = 0;
 
   // Length scoring
-  if (password.length >= 8) score += 1;
-  if (password.length >= 12) score += 1;
-  if (password.length >= 16) score += 1;
+  if (password.length >= 8) {
+    score += 1;
+  }
+  if (password.length >= 12) {
+    score += 1;
+  }
+  if (password.length >= 16) {
+    score += 1;
+  }
 
   // Character variety scoring
   let varietyCount = 0;
-  if (options.lowercase && /[a-z]/.test(password)) varietyCount++;
-  if (options.uppercase && /[A-Z]/.test(password)) varietyCount++;
-  if (options.numbers && /[0-9]/.test(password)) varietyCount++;
-  if (options.symbols && /[^a-zA-Z0-9]/.test(password)) varietyCount++;
+  if (options.lowercase && /[a-z]/.test(password)) {
+    varietyCount++;
+  }
+  if (options.uppercase && /[A-Z]/.test(password)) {
+    varietyCount++;
+  }
+  if (options.numbers && /[0-9]/.test(password)) {
+    varietyCount++;
+  }
+  if (options.symbols && /[^a-zA-Z0-9]/.test(password)) {
+    varietyCount++;
+  }
 
   // Add points for character variety
-  if (varietyCount >= 3) score += 1;
-  if (varietyCount >= 4) score += 1;
+  if (varietyCount >= 3) {
+    score += 1;
+  }
+  if (varietyCount >= 4) {
+    score += 1;
+  }
 
   return Math.min(score, 4); // Cap at 4
 };
